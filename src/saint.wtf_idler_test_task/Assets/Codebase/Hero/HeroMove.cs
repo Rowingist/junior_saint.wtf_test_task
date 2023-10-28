@@ -1,3 +1,4 @@
+using Codebase.CameraLogic;
 using Codebase.Infrastructure;
 using Codebase.Services.Input;
 using UnityEngine;
@@ -15,8 +16,15 @@ namespace Codebase.Hero
     private void Awake() => 
       _inputService = GameBootstrapper.InputService;
 
-    private void Start() => 
+    private void Start()
+    {
       _camera = Camera.main;
+
+      CameraFollow();
+    }
+
+    private void CameraFollow() => 
+      _camera.GetComponent<CameraFollow>().Follow(gameObject);
 
     private void Update()
     {
