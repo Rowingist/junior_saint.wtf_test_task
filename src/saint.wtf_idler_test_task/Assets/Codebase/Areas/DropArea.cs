@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Codebase.Logic;
 using Codebase.MovingResource;
 using UnityEngine;
@@ -10,6 +11,14 @@ namespace Codebase.Areas
     [SerializeField] private Transform _centralPoint;
 
     public Vector3 CentralPoint => _centralPoint.position;
+    
+    private readonly Dictionary<Storage, Resource> _resources = new Dictionary<Storage, Resource>();
+
+    public void Receive(Storage storage, Resource resource)
+    {
+      _resources[storage] = resource;
+    }
+    
     
     public Storage GetStorageByResourceType(ResourceType targetResource)
     {

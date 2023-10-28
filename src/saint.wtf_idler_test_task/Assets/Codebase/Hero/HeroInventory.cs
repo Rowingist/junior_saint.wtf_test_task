@@ -4,6 +4,7 @@ using System.Linq;
 using Codebase.Areas;
 using Codebase.Logic;
 using Codebase.MovingResource;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Codebase.Hero
@@ -64,7 +65,9 @@ namespace Codebase.Hero
               StartCoroutine(Transmit(_resources[targetCell].transform,
                 cellInDropStorage.transform));
 
+              dropArea.Receive(storage, _resources[targetCell]);
               cellInDropStorage.Fill(type);
+              
               _resources[targetCell] = null;
               _cells[targetCell].Empty();
               Resort();
@@ -146,7 +149,7 @@ namespace Codebase.Hero
       if (!AbleToTransitResource(receiveArea)) return;
 
       if (!receiveArea.TryGetResource(out var resource)) return;
-
+      
       availableCell.Fill(resource.Type);
 
       _resources.Add(resource);
@@ -176,18 +179,25 @@ namespace Codebase.Hero
 
       for (int i = 0; i < _resources.Count; i++)
       {
-        if(_resources[i].Type == _cells[i].FilledResourceType)
+        if (_resources[i].Type == _cells[i].FilledResourceType)
           StartCoroutine(Transmit(_resources[i].transform, _cells[i].transform));
       }
     }
 
     private IEnumerator Transmit(Transform resource, Transform target)
     {
-      Vector3 currentVelocity = Vector3.zero;
+      yield return new WaitUntil(() => resource.GetComponent<Resource>().IsPickable);
+      
       resource.parent = null;
-      while ((resource.position - target.position).sqrMagnitude > Constants.StopTransitDistance)
+      Vector3 startPosition = resource.position;
+      
+      float t = 0;
+      
+      while (t < 1)
       {
-        resource.position = Vector3.SmoothDamp(resource.position, target.position, ref currentVelocity, smoothTime);
+        resource.position = Vector3.Lerp(startPosition, target.position, t);
+
+        t += Time.deltaTime / Constants.ResourceMoveDuration;
         yield return null;
       }
 

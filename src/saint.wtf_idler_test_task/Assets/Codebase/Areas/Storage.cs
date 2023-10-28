@@ -12,8 +12,18 @@ namespace Codebase.Areas
 
     [SerializeField] private List<Cell> _cells;
 
+    public bool IsFull => TryMakeFull();
+    public bool IsEmpty => TryMakeEmpty();
+    
     public ResourceType ResourceType => _resourceType;
     
     public Cell FirstEmptyCell => _cells.FirstOrDefault(c => c.IsEmpty);
+    public Cell LastFilledCell => _cells.LastOrDefault(c => !c.IsEmpty);
+
+    private bool TryMakeFull() => 
+      _cells.All(cell => !cell.IsEmpty);
+
+    private bool TryMakeEmpty() => 
+      _cells.All(cell => cell.IsEmpty);
   }
 }
