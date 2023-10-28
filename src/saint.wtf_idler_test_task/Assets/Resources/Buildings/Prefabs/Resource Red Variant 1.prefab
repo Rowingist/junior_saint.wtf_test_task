@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7333630090499665938, guid: 473e24ffa8ea0c3448ca38a620d91517, type: 3}
       propertyPath: m_Name
-      value: Resource
+      value: Resource Red Variant 1
       objectReference: {fileID: 0}
     - target: {fileID: 7333630090499666029, guid: 473e24ffa8ea0c3448ca38a620d91517, type: 3}
       propertyPath: m_RootOrder

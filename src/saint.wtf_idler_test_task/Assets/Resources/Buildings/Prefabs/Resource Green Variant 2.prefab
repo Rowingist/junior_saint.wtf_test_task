@@ -7,9 +7,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6016371779665507021, guid: 473e24ffa8ea0c3448ca38a620d91517, type: 3}
+      propertyPath: Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7333630089696049339, guid: 473e24ffa8ea0c3448ca38a620d91517, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d9ef1fe771523fd449ddccb92c6da39d, type: 2}
     - target: {fileID: 7333630090499665938, guid: 473e24ffa8ea0c3448ca38a620d91517, type: 3}
       propertyPath: m_Name
-      value: Resource
+      value: Resource Green Variant 2
       objectReference: {fileID: 0}
     - target: {fileID: 7333630090499666029, guid: 473e24ffa8ea0c3448ca38a620d91517, type: 3}
       propertyPath: m_RootOrder

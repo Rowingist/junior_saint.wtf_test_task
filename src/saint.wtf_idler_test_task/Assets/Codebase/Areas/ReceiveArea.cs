@@ -1,8 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Codebase.Logic;
 using Codebase.MovingResource;
-using DG.Tweening;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -12,8 +12,14 @@ namespace Codebase.Areas
   {
     [SerializeField] private Transform _centralPoint;
     [SerializeField] private Cell[] _cells;
+
+    [SerializeField] private Storage _storage;
     
     private List<Resource> _resources = new List<Resource>();
+    
+    public bool IsGreen;
+    
+    private float smoothTime = 0.1f;
 
     public Vector3 CentralPoint => _centralPoint.position;
 
@@ -24,7 +30,12 @@ namespace Codebase.Areas
     {
       for (int i = 0; i < _cells.Length; i++)
       {
-        Object newResource = Resources.Load("Buildings/Prefabs/Resource Red Variant 1");
+        Object newResource = new Object();
+        if(!IsGreen)
+          newResource = Resources.Load("Buildings/Prefabs/Resource Red Variant 1");
+        else
+          newResource = Resources.Load("Buildings/Prefabs/Resource Green Variant 2");
+
         var resourceGO = Instantiate(newResource, transform.position, Quaternion.identity) as GameObject;
         Resource resource = resourceGO.GetComponent<Resource>();
         Receive(resource);
@@ -34,9 +45,9 @@ namespace Codebase.Areas
     public void Receive(Resource resource)
     {
       if (!_firstEmptyCell) return;
-      
-      resource.transform.DOMove(_firstEmptyCell.transform.position, Constants.ResourceMoveDuration);
-      _firstEmptyCell.Fill();
+
+      StartCoroutine(Transmit(resource.transform, _firstEmptyCell.transform));
+      _firstEmptyCell.Fill(resource.Type);
       _resources.Add(resource);
     }
 
@@ -65,6 +76,18 @@ namespace Codebase.Areas
       
       _lastFilledCell.Empty();
       _resources.Remove(resource);
+    }
+    
+    private IEnumerator Transmit(Transform resource, Transform target)
+    {
+      Vector3 currentVelocity = Vector3.zero;
+      while ((resource.position - target.position).sqrMagnitude > Constants.StopTransitDistance)
+      {
+        resource.position = Vector3.SmoothDamp(resource.position, target.position, ref currentVelocity, smoothTime);
+        yield return null;
+      }
+
+      SetNewParent(resource, target);
     }
   }
 }
