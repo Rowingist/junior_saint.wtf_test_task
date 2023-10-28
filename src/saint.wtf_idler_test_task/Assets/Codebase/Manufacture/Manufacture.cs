@@ -15,7 +15,7 @@ namespace Codebase.Manufacture
     [SerializeField] private ResourceType _typeOutput;
     [SerializeField] private ReceiveArea _receiveArea;
 
-    protected bool IsStopped => _receiveArea.Storage.IsFull;
+    protected bool IsReceiveAreaFull => _receiveArea.Storage.IsFull;
     protected ReceiveArea ReceiveArea => _receiveArea;
     protected WaitForSecondsRealtime CullDown;
     protected GameObject CurrentResource;

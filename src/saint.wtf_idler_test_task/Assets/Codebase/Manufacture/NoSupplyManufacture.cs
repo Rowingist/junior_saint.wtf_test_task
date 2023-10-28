@@ -22,7 +22,7 @@ namespace Codebase.Manufacture
     {
       while (Application.isPlaying)
       {
-        yield return new WaitUntil(() => !IsStopped);
+        yield return new WaitUntil(() => !IsReceiveAreaFull);
         yield return CullDown;
         yield return StartCoroutine(MakeResource(ConveyorSpeed));
       }

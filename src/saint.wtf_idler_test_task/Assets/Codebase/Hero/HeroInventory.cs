@@ -65,7 +65,7 @@ namespace Codebase.Hero
               StartCoroutine(Transmit(_resources[targetCell].transform,
                 cellInDropStorage.transform));
 
-              dropArea.Receive(storage, _resources[targetCell]);
+              dropArea.Receive(_resources[targetCell]);
               cellInDropStorage.Fill(type);
               
               _resources[targetCell] = null;

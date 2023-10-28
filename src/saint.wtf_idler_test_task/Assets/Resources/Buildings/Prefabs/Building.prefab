@@ -139,8 +139,6 @@ MonoBehaviour:
   - {fileID: 1994801475069770049}
   - {fileID: 1994801473848239527}
   - {fileID: 1994801474116437116}
-  IsFull: 0
-  IsEmpty: 0
 --- !u!1 &1766548773942666746
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,9 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570cee1fd2e149cc951b2197d316633c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _storages:
-  - {fileID: 1766548773810629974}
-  - {fileID: 1766548774936605468}
+  _storages: []
   _centralPoint: {fileID: 1766548774698450210}
 --- !u!65 &1766548773942666751
 BoxCollider:
@@ -677,8 +673,6 @@ MonoBehaviour:
   - {fileID: 1994801474670813684}
   - {fileID: 1994801475449409227}
   - {fileID: 1994801473919105603}
-  IsFull: 0
-  IsEmpty: 0
 --- !u!1 &1766548774698450211
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,8 +944,6 @@ MonoBehaviour:
   - {fileID: 1994801475210293780}
   - {fileID: 1994801473914022291}
   - {fileID: 1994801473725557098}
-  IsFull: 0
-  IsEmpty: 0
 --- !u!1 &1766548774952344550
 GameObject:
   m_ObjectHideFlags: 0

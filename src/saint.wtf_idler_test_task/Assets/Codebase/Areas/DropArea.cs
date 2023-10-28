@@ -1,5 +1,6 @@
+using System;
 using System.Collections.Generic;
-using Codebase.Logic;
+using System.Linq;
 using Codebase.MovingResource;
 using UnityEngine;
 
@@ -11,15 +12,48 @@ namespace Codebase.Areas
     [SerializeField] private Transform _centralPoint;
 
     public Vector3 CentralPoint => _centralPoint.position;
-    
-    private readonly Dictionary<Storage, Resource> _resources = new Dictionary<Storage, Resource>();
 
-    public void Receive(Storage storage, Resource resource)
+    private readonly List<Resource> _resources = new List<Resource>();
+
+    public Storage[] Storages => _storages;
+    
+    public void Receive(Resource resource)
     {
-      _resources[storage] = resource;
+      _resources.Add(resource);
     }
-    
-    
+
+    [ContextMenu("Drop")]
+    public void Drop()
+    {
+      if(_storages == Array.Empty<Storage>())
+        return;
+
+      Resource[] resources = new Resource[_storages.Length];
+
+      for (int i = 0; i < _storages.Length; i++)
+      {
+        if (!_storages[i].IsEmpty)
+        {
+          resources[i] = _resources.LastOrDefault(r => r.Type == _storages[i].ResourceType);
+        }
+      }
+
+      foreach (Resource resource in resources)
+      {
+        if (resource is null) return;
+      }
+
+      for (int i = 0; i < resources.Length; i++)
+      {
+        resources[i].transform.parent = null;
+        resources[i].transform.position = Vector3.zero;
+        //go to pool
+        resources[i].gameObject.SetActive(false);
+        _resources.Remove(resources[i]);
+        _storages[i].LastFilledCell.Empty();
+      }
+    }
+
     public Storage GetStorageByResourceType(ResourceType targetResource)
     {
       foreach (Storage storage in _storages)
@@ -31,7 +65,7 @@ namespace Codebase.Areas
       Debug.LogError("No capable storage available.");
       return null;
     }
-    
+
     public ResourceType[] GetStorageResourceTypes()
     {
       ResourceType[] types = new ResourceType[_storages.Length];
@@ -40,7 +74,7 @@ namespace Codebase.Areas
       {
         types[i] = _storages[i].ResourceType;
       }
-      
+
       return types;
     }
   }
