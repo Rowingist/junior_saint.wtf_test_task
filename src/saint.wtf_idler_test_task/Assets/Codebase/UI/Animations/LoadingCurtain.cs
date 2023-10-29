@@ -17,6 +17,7 @@ namespace Codebase.UI.Animations
 
     public void Show()
     {
+      Curtain.blocksRaycasts = true;
       gameObject.SetActive(true);
       Curtain.alpha = 1;
     }
@@ -30,11 +31,13 @@ namespace Codebase.UI.Animations
     {
       WaitForSeconds fadeInSeconds = new WaitForSeconds(HidingStep);
       
+      Curtain.blocksRaycasts = false;
       while(Curtain.alpha > 0f)
       {
         Curtain.alpha -= HidingStep;
         yield return fadeInSeconds;
       }
+
     }
   }
 }

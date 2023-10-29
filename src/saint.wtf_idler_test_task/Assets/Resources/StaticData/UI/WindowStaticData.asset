@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9320428a4d49c8b831776b5ac9cf3c, type: 3}
   m_Name: WindowStaticData
   m_EditorClassIdentifier: 
-  Configs: []
+  Configs:
+  - WindowId: 1
+    Template: {fileID: 5374272479360036447, guid: 68ebd8b374d93ac4bbb8ed0c123c3949, type: 3}

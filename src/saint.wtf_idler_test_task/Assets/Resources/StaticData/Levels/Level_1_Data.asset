@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468ee128def34466ad0a7d7a7da8135e, type: 3}
   m_Name: Level_1_Data
   m_EditorClassIdentifier: 
-  LevelKey: 
+  LevelKey: Level_1
   InitialHeroPosition: {x: 0, y: 0, z: 0}

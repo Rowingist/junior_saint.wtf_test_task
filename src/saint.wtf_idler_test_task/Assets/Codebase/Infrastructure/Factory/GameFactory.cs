@@ -6,8 +6,8 @@ namespace Codebase.Infrastructure.Factory
 {
   public class GameFactory : IGameFactory
   {
-    public List<ISavedProgressReader> ProgressReaders { get; }
-    public List<ISavedProgress> ProgressWriters { get; }
+    public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
+    public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
     
     public GameObject CreateHud()
     {

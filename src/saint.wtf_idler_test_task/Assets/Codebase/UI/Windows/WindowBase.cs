@@ -7,8 +7,6 @@ namespace Codebase.UI.Windows
 {
   public abstract class WindowBase : MonoBehaviour
   {
-    [SerializeField] private Button _closeButton;
-
     protected IPersistentProgressService ProgressService;
     protected PlayerProgress Progress => ProgressService.Progress;
 
@@ -17,8 +15,8 @@ namespace Codebase.UI.Windows
       ProgressService = progressService;
     }
 
-    private void Awake() => 
-      OnAwake();
+    // private void Awake() => 
+    //   OnAwake();
 
     private void Start()
     {
@@ -29,11 +27,11 @@ namespace Codebase.UI.Windows
     private void OnDestroy() => 
       CleanUp();
 
-    protected virtual void OnAwake()
-    {
-      if(_closeButton)
-        _closeButton.onClick.AddListener(() => Destroy(gameObject));
-    }
+    // protected virtual void OnAwake()
+    // {
+    //   if(_closeButton)
+    //     _closeButton.onClick.AddListener(() => Destroy(gameObject));
+    // }
 
     protected virtual void Initialize() {}
     protected virtual void SubscribeUpdates() {}

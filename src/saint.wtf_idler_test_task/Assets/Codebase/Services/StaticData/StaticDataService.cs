@@ -9,8 +9,8 @@ namespace Codebase.Services.StaticData
 {
   public class StaticDataService : IStaticDataService
   {
-    private const string LevelsDataPath = "Static Data/Levels";
-    private const string WindowsStaticDataPath = "Static Data/UI/WindowStaticData";
+    private const string LevelsDataPath = "StaticData/Levels";
+    private const string WindowsStaticDataPath = "StaticData/UI/WindowStaticData";
 
     private Dictionary<string, LevelStaticData> _levels;
     private Dictionary<WindowId, WindowConfig> _windowConfigs;

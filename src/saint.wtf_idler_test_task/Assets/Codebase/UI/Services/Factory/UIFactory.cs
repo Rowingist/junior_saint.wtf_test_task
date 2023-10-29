@@ -24,8 +24,8 @@ namespace Codebase.UI.Services.Factory
     public GameObject CreateWarningWindow(Transform under)
     {
       WindowConfig config = _staticData.ForWindow(WindowId.WarningContainer);
-      WindowBase warningWindow = Object.Instantiate(config.Template, under);
-
+      WarningWindow warningWindow = Object.Instantiate(config.Template, under) as WarningWindow;
+      
       return warningWindow.gameObject;
     }
 

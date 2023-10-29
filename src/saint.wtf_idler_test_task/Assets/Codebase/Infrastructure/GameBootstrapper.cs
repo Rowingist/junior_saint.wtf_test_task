@@ -8,13 +8,13 @@ namespace Codebase.Infrastructure
   
   public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
   {
-    [SerializeField] private LoadingCurtain _curtain;
+    [SerializeField] private LoadingCurtain _curtainTemplate;
     
     private GameStateMachine _stateMachine;
 
     private void Awake()
     {
-      _stateMachine = new GameStateMachine(new SceneLoader(this), _curtain,AllServices.Container);
+      _stateMachine = new GameStateMachine(new SceneLoader(this), Instantiate(_curtainTemplate),AllServices.Container);
       _stateMachine.Enter<BootstrapState>();
       
       DontDestroyOnLoad(this);
