@@ -9,6 +9,7 @@ namespace Codebase.Hero
   {
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private float _movementSpeed;
+    [SerializeField] private float rotateReactionTime;
     
     private IInputService _inputService;
     private Camera _camera;
@@ -26,6 +27,7 @@ namespace Codebase.Hero
     private void CameraFollow() => 
       _camera.GetComponent<CameraFollow>().Follow(gameObject);
 
+        Vector3 _current = Vector3.zero;
     private void Update()
     {
       Vector3 movementVector = Vector3.zero;
@@ -36,7 +38,7 @@ namespace Codebase.Hero
         movementVector.y = 0;
         movementVector.Normalize();
 
-        transform.forward = movementVector;
+        transform.forward = Vector3.SmoothDamp(transform.forward, movementVector, ref _current, rotateReactionTime);
       }
 
       movementVector += Physics.gravity;
