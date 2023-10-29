@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Codebase.StaticData.Level
@@ -7,5 +8,12 @@ namespace Codebase.StaticData.Level
   {
     public string LevelKey;
     public Vector3 InitialHeroPosition;
+    
+    public int ResourcePoolsCapacity;
+
+    public List<ManufactureConfig> Configs;
+    public List<ManufactureSpawnerStaticData> ManufactureSpawners;
+    
+    public List<ResourceConfig> ResourceConfigs;
   }
 }

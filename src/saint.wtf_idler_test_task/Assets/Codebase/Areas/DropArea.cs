@@ -22,7 +22,6 @@ namespace Codebase.Areas
       _resources.Add(resource);
     }
 
-    [ContextMenu("Drop")]
     public void Drop()
     {
       if(_storages == Array.Empty<Storage>())
@@ -32,10 +31,8 @@ namespace Codebase.Areas
 
       for (int i = 0; i < _storages.Length; i++)
       {
-        if (!_storages[i].IsEmpty)
-        {
+        if (!_storages[i].IsEmpty) 
           resources[i] = _resources.LastOrDefault(r => r.Type == _storages[i].ResourceType);
-        }
       }
 
       foreach (Resource resource in resources)
@@ -47,8 +44,10 @@ namespace Codebase.Areas
       {
         resources[i].transform.parent = null;
         resources[i].transform.position = Vector3.zero;
-        //go to pool
+        
         resources[i].gameObject.SetActive(false);
+        resources[i].BackToDefaultParent();
+        
         _resources.Remove(resources[i]);
         _storages[i].LastFilledCell.Empty();
       }
@@ -61,8 +60,7 @@ namespace Codebase.Areas
         if (storage.ResourceType == targetResource)
           return storage;
       }
-
-      Debug.LogError("No capable storage available.");
+      
       return null;
     }
 

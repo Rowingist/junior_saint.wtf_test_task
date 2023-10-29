@@ -1,6 +1,4 @@
 using Codebase.CameraLogic;
-using Codebase.Infrastructure;
-using Codebase.Services;
 using Codebase.Services.Input;
 using UnityEngine;
 
@@ -15,8 +13,8 @@ namespace Codebase.Hero
     private IInputService _inputService;
     private Camera _camera;
 
-    private void Awake() => 
-      _inputService = AllServices.Container.Single<IInputService>();
+    public void Construct(IInputService inputService) => 
+      _inputService = inputService;
 
     private void Start()
     {
@@ -31,6 +29,9 @@ namespace Codebase.Hero
         Vector3 _current = Vector3.zero;
     private void Update()
     {
+      if(_inputService is null)
+        return;
+      
       Vector3 movementVector = Vector3.zero;
 
       if (_inputService.Axis.sqrMagnitude > Constants.Epsilon)

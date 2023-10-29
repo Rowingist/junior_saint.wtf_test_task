@@ -359,7 +359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 6702832042886209186}
   _movementSpeed: 4
-  rotateReactionTime: 0.1
+  rotateReactionTime: 0.08
 --- !u!114 &3173857830127058536
 MonoBehaviour:
   m_ObjectHideFlags: 0

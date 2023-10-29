@@ -3,9 +3,11 @@ using Codebase.Infrastructure.Factory;
 using Codebase.Services.Input;
 using Codebase.Services.PersistentProgress;
 using Codebase.Services.StaticData;
+using Codebase.StaticData.Level;
 using Codebase.UI.Animations;
 using Codebase.UI.Services.Factory;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Codebase.Infrastructure.States
 {
@@ -48,13 +50,46 @@ namespace Codebase.Infrastructure.States
 
     private void OnLoaded()
     {
-      //InitUIRoot();
-      //InitGameWorld();
+      InitUIRoot();
+      InitGameWorld();
 
       InformProgressReaders();
 
       _gameStateMachine.Enter<GameLoopState>();
     }
+
+    private void InitUIRoot() => 
+      _uiFactory.CreateUIRoot();
+
+    private void InitGameWorld()
+    {
+      LevelStaticData levelData = LevelStaticData();
+      
+      GameObject hud = InitHud();
+      InitJoystick(hud.transform);
+
+      InitSpawners(levelData);
+      GameObject player = InitPlayer(levelData);
+      CameraFollow(player);
+    }
+    
+    private void InitSpawners(LevelStaticData levelStaticData)
+    {
+      foreach (ManufactureSpawnerStaticData spawnerData in levelStaticData.ManufactureSpawners)
+          _gameFactory.CreateManufactureSpawner( spawnerData.Position, spawnerData.ResourceType);
+    }
+    
+    private LevelStaticData LevelStaticData() =>
+      _staticData.ForLevel(SceneManager.GetActiveScene().name);
+
+    private GameObject InitHud() => 
+      _gameFactory.CreateHud();
+
+    private void InitJoystick(Transform under) => 
+      _gameFactory.CreateJoystick(under);
+
+    private GameObject InitPlayer(LevelStaticData levelData) => 
+      _gameFactory.CreateHero(levelData.InitialHeroPosition);
 
     private void InformProgressReaders()
     {
@@ -64,7 +99,7 @@ namespace Codebase.Infrastructure.States
 
     private void CameraFollow(GameObject Hero)
     {
-      CameraFollow  cameraFollow = Camera.main.GetComponentInParent<CameraFollow>();
+      CameraFollow cameraFollow = Camera.main.GetComponentInParent<CameraFollow>();
       cameraFollow.Follow(Hero);
     }
     
