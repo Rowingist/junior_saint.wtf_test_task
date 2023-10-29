@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Codebase.UI.Animations
 {
   [RequireComponent(typeof(CanvasGroup))]
-  class LoadingCurtain : MonoBehaviour
+  public class LoadingCurtain : MonoBehaviour
   {
     private const float HidingStep = 0.03f;
     

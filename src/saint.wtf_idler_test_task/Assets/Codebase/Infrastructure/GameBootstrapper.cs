@@ -1,5 +1,5 @@
-using System;
-using Codebase.Services.Input;
+using Codebase.Infrastructure.States;
+using Codebase.Services;
 using Codebase.UI.Animations;
 using UnityEngine;
 
@@ -11,14 +11,11 @@ namespace Codebase.Infrastructure
     [SerializeField] private LoadingCurtain _curtain;
     
     private GameStateMachine _stateMachine;
-    public static IInputService InputService;  
 
     private void Awake()
     {
-      _stateMachine = new GameStateMachine();
-      //_stateMachine.Enter<BootstapState>();
-
-      InputService = new MobileInputService();
+      _stateMachine = new GameStateMachine(new SceneLoader(this), _curtain,AllServices.Container);
+      _stateMachine.Enter<BootstrapState>();
       
       DontDestroyOnLoad(this);
     }
