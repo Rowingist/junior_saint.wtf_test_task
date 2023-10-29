@@ -7,5 +7,10 @@ namespace Codebase
     public const float TransmittingInterval = 0.1f;
     public const float ResourceMoveDuration = 0.1f;
     public const float StopTransitDistance = 0.35f;
+
+    public const string InitialSceneName = "Initial";
+    public const string DefaultSceneName = "Level_1";
+    public const int InitialBagCapacity = 10;
+    public const int InitialMoveSpeed = 4;
   }
 }

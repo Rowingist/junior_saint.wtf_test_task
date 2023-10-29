@@ -1,5 +1,6 @@
 using Codebase.CameraLogic;
 using Codebase.Infrastructure;
+using Codebase.Services;
 using Codebase.Services.Input;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace Codebase.Hero
     private Camera _camera;
 
     private void Awake() => 
-      _inputService = GameBootstrapper.InputService;
+      _inputService = AllServices.Container.Single<IInputService>();
 
     private void Start()
     {
