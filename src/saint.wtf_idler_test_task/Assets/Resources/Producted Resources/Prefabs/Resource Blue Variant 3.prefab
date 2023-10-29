@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d1291566e8880ca488c2df8a916bd434, type: 2}
     - target: {fileID: 7333630090499665938, guid: 473e24ffa8ea0c3448ca38a620d91517, type: 3}
       propertyPath: m_Name
-      value: Resource Blue Variant
+      value: Resource Blue Variant 3
       objectReference: {fileID: 0}
     - target: {fileID: 7333630090499666029, guid: 473e24ffa8ea0c3448ca38a620d91517, type: 3}
       propertyPath: m_RootOrder
