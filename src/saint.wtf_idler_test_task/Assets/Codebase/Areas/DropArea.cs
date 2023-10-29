@@ -44,8 +44,10 @@ namespace Codebase.Areas
       {
         resources[i].transform.parent = null;
         resources[i].transform.position = Vector3.zero;
-        //go to pool
+        
         resources[i].gameObject.SetActive(false);
+        resources[i].BackToDefaultParent();
+        
         _resources.Remove(resources[i]);
         _storages[i].LastFilledCell.Empty();
       }

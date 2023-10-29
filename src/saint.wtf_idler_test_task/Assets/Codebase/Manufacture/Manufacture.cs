@@ -21,6 +21,7 @@ namespace Codebase.Manufacture
     private readonly List<Resource> _resourcesStorage = new List<Resource>();
 
     [field: SerializeField] public ResourceType TypeOutput { get; private set; }
+    [field: SerializeField] public GameObject ResourcesPool { get; private set; }
     protected bool IsReceiveAreaFull => _receiveArea.Storage.IsFull;
 
     public void Construct(List<Resource> pooledResources)
@@ -38,10 +39,13 @@ namespace Codebase.Manufacture
     
     protected bool TryGetPooledResource(out Resource resource)
     {
-      resource = _resourcesStorage.FirstOrDefault(r => r.isActiveAndEnabled);
+      resource = _resourcesStorage.FirstOrDefault(r => !r.isActiveAndEnabled);
 
       return resource is not null;
     }
+
+    protected void EnableResource(Resource resource) => 
+      resource.gameObject.SetActive(true);
 
     protected void FinishTransition(Resource resource)
     {

@@ -6,6 +6,9 @@ namespace Codebase.Infrastructure.AssetManagement
   {
     public GameObject Instantiate(GameObject template, Vector3 at) => 
       Object.Instantiate(template, at, Quaternion.identity);
+    
+    public GameObject Instantiate(GameObject template, Transform under) => 
+      Object.Instantiate(template, under.position, Quaternion.identity, under);
 
     public GameObject Instantiate(string path)
     {

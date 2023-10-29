@@ -120,6 +120,7 @@ MonoBehaviour:
   ProducingCullDown: 1
   _receiveArea: {fileID: 3318188748375782745}
   <TypeOutput>k__BackingField: 2
+  <ResourcesPool>k__BackingField: {fileID: 4595089004293432614}
   _dropArea: {fileID: 3318188749127510636}
 --- !u!114 &3318188748375782745 stripped
 MonoBehaviour:
@@ -157,6 +158,11 @@ MonoBehaviour:
 --- !u!4 &4485299575174379343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 627801233315002591, guid: 4407c7208cf4ba74a9634fc9083fe172, type: 3}
+  m_PrefabInstance: {fileID: 3929559820024172432}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4595089004293432614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 670351128214825654, guid: 4407c7208cf4ba74a9634fc9083fe172, type: 3}
   m_PrefabInstance: {fileID: 3929559820024172432}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7715303065212143089 stripped

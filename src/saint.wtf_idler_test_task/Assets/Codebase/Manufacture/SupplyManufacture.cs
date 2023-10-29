@@ -29,6 +29,8 @@ namespace Codebase.Manufacture
     {
       if (TryGetPooledResource(out Resource resource))
       {
+        EnableResource(resource);
+
         _dropArea.Drop();
 
         yield return StartCoroutine(RoutineUtils.TransitFromToTarget(resource.transform, SpawnPoint.position,

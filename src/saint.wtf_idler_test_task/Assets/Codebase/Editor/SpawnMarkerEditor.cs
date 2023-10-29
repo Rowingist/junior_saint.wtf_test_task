@@ -10,8 +10,8 @@ namespace Codebase.Editor
     [DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NonSelected)]
     public static void RenderCustomGizmo(ManufactureSpawnMarker spawner, GizmoType gizmo)
     {
-      Gizmos.color = Color.red;
-      Gizmos.DrawSphere(spawner.transform.position, 0.5f);
+      Gizmos.color = new Color32(181,102,24, 162);
+      Gizmos.DrawCube(spawner.transform.position, spawner.Size);
     }
   }
 }

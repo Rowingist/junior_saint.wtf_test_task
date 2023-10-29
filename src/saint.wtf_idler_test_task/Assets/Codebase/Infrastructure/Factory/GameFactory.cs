@@ -62,7 +62,13 @@ namespace Codebase.Infrastructure.Factory
       GameObject manufactureObject = InstantiateRegistered(template, at);
       return manufactureObject;
     }
-    
+
+    public GameObject CreateResource(GameObject template, GameObject defaultParent)
+    {
+      GameObject resource = InstantiateRegistered(template, defaultParent.transform);
+      return resource;
+    }
+
     public void Cleanup()
     {
       ProgressReaders.Clear();
@@ -72,6 +78,13 @@ namespace Codebase.Infrastructure.Factory
     private GameObject InstantiateRegistered(GameObject prefab, Vector3 at)
     {
       GameObject gameObject = _assets.Instantiate(prefab, at);
+      RegisterProgressWatchers(gameObject);
+
+      return gameObject;
+    }
+    private GameObject InstantiateRegistered(GameObject prefab, Transform under)
+    {
+      GameObject gameObject = _assets.Instantiate(prefab, under);
       RegisterProgressWatchers(gameObject);
 
       return gameObject;

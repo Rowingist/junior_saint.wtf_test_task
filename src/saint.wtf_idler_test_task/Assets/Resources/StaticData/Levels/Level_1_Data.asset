@@ -13,21 +13,25 @@ MonoBehaviour:
   m_Name: Level_1_Data
   m_EditorClassIdentifier: 
   LevelKey: Level_1
-  InitialHeroPosition: {x: -3.55, y: 0, z: -1.37}
+  InitialHeroPosition: {x: -1.25, y: 0, z: -4.23}
   Resource1PoolCapacity: 40
   Resource2PoolCapacity: 40
   Resource3PoolCapacity: 40
   Configs:
-  - Type: 1
-    Template: {fileID: 1711936967375534460, guid: 69f0f9c721b288444a0b56c89fedc9fe, type: 3}
-  - Type: 2
-    Template: {fileID: 3318188748352629146, guid: fa57c3b7472f41f488bd1ba37839055d, type: 3}
-  - Type: 3
-    Template: {fileID: 1098500635655351677, guid: 48a783de7d540b1438abd3e4141d6599, type: 3}
+  - Template: {fileID: 1711936967375534460, guid: 69f0f9c721b288444a0b56c89fedc9fe, type: 3}
+  - Template: {fileID: 3318188748352629146, guid: fa57c3b7472f41f488bd1ba37839055d, type: 3}
+  - Template: {fileID: 1098500635655351677, guid: 48a783de7d540b1438abd3e4141d6599, type: 3}
   ManufactureSpawners:
   - ResourceType: 3
-    Position: {x: 8.046634, y: -1.0624905, z: 5.889141}
+    Position: {x: -1.31, y: -1.0624905, z: 9.9}
   - ResourceType: 2
-    Position: {x: 2.5993872, y: -1.0624924, z: -5.3340926}
+    Position: {x: 4.77, y: -1.0624924, z: 0.45}
   - ResourceType: 1
-    Position: {x: -1.9387703, y: -1.0624924, z: 9.11949}
+    Position: {x: -7.15, y: -1.0624924, z: 1.34}
+  ResourceConfigs:
+  - GUIIcon: {fileID: 1477120710, guid: 3489ef9c78ef8104fac8d31b3ad07ca7, type: 3}
+    Template: {fileID: 6627133889040541235, guid: 81810cf96b53a2b4782e7e10fb017414, type: 3}
+  - GUIIcon: {fileID: -1494249175, guid: 3489ef9c78ef8104fac8d31b3ad07ca7, type: 3}
+    Template: {fileID: 2081570384072829673, guid: 2a8c09206b6405e42a227f23185b4e9a, type: 3}
+  - GUIIcon: {fileID: 66395806, guid: 3489ef9c78ef8104fac8d31b3ad07ca7, type: 3}
+    Template: {fileID: 9132049566378609493, guid: 2d8a378e0beb4714db31593e5014fd2d, type: 3}
