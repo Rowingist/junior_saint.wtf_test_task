@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Linq;
 using Codebase.Areas;
+using Codebase.Logic;
 using Codebase.MovingResource;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Codebase.Manufacture
 {
@@ -12,17 +12,10 @@ namespace Codebase.Manufacture
   {
     [SerializeField] private DropArea _dropArea;
 
-    private void Start()
-    {
-      Produce();
-    }
-    
-    public override void Produce()
-    {
+    public override void Produce() =>
       StartCoroutine(Producing());
-    }
 
-    private IEnumerator Producing()
+    public override IEnumerator Producing()
     {
       while (Application.isPlaying)
       {
@@ -32,28 +25,19 @@ namespace Codebase.Manufacture
       }
     }
 
-    private IEnumerator MakeResource(float duration)
+    public override IEnumerator MakeResource(float duration)
     {
-      Object resource = Resources.Load("Buildings/Prefabs/Resource Green Variant 2");
-      GameObject resGO = Instantiate(resource, SpawnPoint) as GameObject;
-      
-      _dropArea.Drop();
-      
-      float t = 0;
-      while (t < 1)
+      if (TryGetPooledResource(out Resource resource))
       {
-        resGO.transform.position = Vector3.Lerp(SpawnPoint.position, OutputPoint.position, t);
-        
-        t += Time.deltaTime / duration;
+        _dropArea.Drop();
 
-        yield return null;
+        yield return StartCoroutine(RoutineUtils.TransitFromToTarget(resource.transform, SpawnPoint.position,
+          OutputPoint.position, duration));
+
+        yield return CullDown;
+
+        FinishTransition(resource);
       }
-
-      yield return CullDown;
-
-      Resource resource1 = resGO.GetComponent<Resource>();
-      resource1.IsPickable = false;
-      ReceiveArea.Receive(resource1);
     }
 
     private bool AnyOfInputStoragesIsEmpty()

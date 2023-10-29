@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Codebase.MovingResource;
 using Codebase.Services;
 using Codebase.Services.PersistentProgress;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace Codebase.Infrastructure.Factory
     GameObject CreateHud();
     GameObject CreateJoystick(Transform under);
     GameObject CreateHero(Vector3 at);
+    void CreateManufactureSpawner(Vector3 at, ResourceType resourceType);
+    GameObject CreateManufacture(GameObject template, Vector3 at);
     
     void Cleanup();
   }

@@ -48,7 +48,9 @@ namespace Codebase.Infrastructure.States
       _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
       _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssetProvider>(),
         _services.Single<IStaticDataService>()));
-      _services.RegisterSingle<IGameFactory>(new GameFactory());
+      _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(),
+        _services.Single<IPersistentProgressService>(), _services.Single<IInputService>(),
+        _services.Single<IStaticDataService>()));
       _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(),
         _services.Single<IGameFactory>()));
     }

@@ -4,6 +4,9 @@ namespace Codebase.Infrastructure.AssetManagement
 {
   public class AssetProvider : IAssetProvider
   {
+    public GameObject Instantiate(GameObject template, Vector3 at) => 
+      Object.Instantiate(template, at, Quaternion.identity);
+
     public GameObject Instantiate(string path)
     {
       var template = Resources.Load<GameObject>(path);

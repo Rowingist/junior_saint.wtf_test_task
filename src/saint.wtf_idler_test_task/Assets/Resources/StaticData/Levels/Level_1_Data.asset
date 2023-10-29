@@ -13,4 +13,21 @@ MonoBehaviour:
   m_Name: Level_1_Data
   m_EditorClassIdentifier: 
   LevelKey: Level_1
-  InitialHeroPosition: {x: 0, y: 0, z: 0}
+  InitialHeroPosition: {x: -3.55, y: 0, z: -1.37}
+  Resource1PoolCapacity: 40
+  Resource2PoolCapacity: 40
+  Resource3PoolCapacity: 40
+  Configs:
+  - Type: 1
+    Template: {fileID: 1711936967375534460, guid: 69f0f9c721b288444a0b56c89fedc9fe, type: 3}
+  - Type: 2
+    Template: {fileID: 3318188748352629146, guid: fa57c3b7472f41f488bd1ba37839055d, type: 3}
+  - Type: 3
+    Template: {fileID: 1098500635655351677, guid: 48a783de7d540b1438abd3e4141d6599, type: 3}
+  ManufactureSpawners:
+  - ResourceType: 3
+    Position: {x: 8.046634, y: -1.0624905, z: 5.889141}
+  - ResourceType: 2
+    Position: {x: 2.5993872, y: -1.0624924, z: -5.3340926}
+  - ResourceType: 1
+    Position: {x: -1.9387703, y: -1.0624924, z: 9.11949}

@@ -118,8 +118,8 @@ MonoBehaviour:
   OutputPoint: {fileID: 7715303065212143089}
   ConveyorSpeed: 1
   ProducingCullDown: 1
-  _typeOutput: 2
   _receiveArea: {fileID: 3318188748375782745}
+  <TypeOutput>k__BackingField: 2
   _dropArea: {fileID: 3318188749127510636}
 --- !u!114 &3318188748375782745 stripped
 MonoBehaviour:

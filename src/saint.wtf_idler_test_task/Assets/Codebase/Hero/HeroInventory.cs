@@ -4,7 +4,6 @@ using System.Linq;
 using Codebase.Areas;
 using Codebase.Logic;
 using Codebase.MovingResource;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Codebase.Hero
@@ -62,7 +61,7 @@ namespace Codebase.Hero
 
             if (cellInDropStorage && targetCell < _resources.Count)
             {
-              StartCoroutine(Transmit(_resources[targetCell].transform,
+              StartCoroutine(Transmit(_resources[targetCell],
                 cellInDropStorage.transform));
 
               dropArea.Receive(_resources[targetCell]);
@@ -154,7 +153,7 @@ namespace Codebase.Hero
 
       _resources.Add(resource);
 
-      StartCoroutine(Transmit(resource.transform, availableCell.transform));
+      StartCoroutine(Transmit(resource, availableCell.transform));
     }
 
     private void Resort()
@@ -180,28 +179,19 @@ namespace Codebase.Hero
       for (int i = 0; i < _resources.Count; i++)
       {
         if (_resources[i].Type == _cells[i].FilledResourceType)
-          StartCoroutine(Transmit(_resources[i].transform, _cells[i].transform));
+          StartCoroutine(Transmit(_resources[i], _cells[i].transform));
       }
     }
 
-    private IEnumerator Transmit(Transform resource, Transform target)
+    private IEnumerator Transmit(Resource resource, Transform target)
     {
-      yield return new WaitUntil(() => resource.GetComponent<Resource>().IsPickable);
+      yield return new WaitUntil(() => resource.IsPickable);
       
-      resource.parent = null;
-      Vector3 startPosition = resource.position;
-      
-      float t = 0;
-      
-      while (t < 1)
-      {
-        resource.position = Vector3.Lerp(startPosition, target.position, t);
+      resource.transform.parent = null;
 
-        t += Time.deltaTime / Constants.ResourceMoveDuration;
-        yield return null;
-      }
+      yield return StartCoroutine(RoutineUtils.TransitToTarget(resource.transform, target.position, Constants.ResourceFromToPlayerMoveDuration));
 
-      SetNewParent(resource, target);
+      SetNewParent(resource.transform, target);
     }
   }
 }
