@@ -15,11 +15,36 @@ namespace Codebase.Areas
 
     private readonly List<Resource> _resources = new List<Resource>();
 
-    public Storage[] Storages => _storages;
+    public event Action<ResourceType> OutOfResource;
+    public event Action Filled;
     
+    public Storage[] Storages => _storages;
+
+    private void Start() => 
+      NotifyOfEmptyStorages();
+
+    private void NotifyOfEmptyStorages()
+    {
+      foreach (Storage storage in _storages)
+      {
+        if (storage.IsEmpty)
+          OutOfResource?.Invoke(storage.ResourceType);
+      }
+    }    
+    
+    private void NotifyOfFilledStorages()
+    {
+      foreach (Storage storage in _storages)
+      {
+        if (!storage.IsEmpty)
+          Filled?.Invoke();
+      }
+    }
+
     public void Receive(Resource resource)
     {
       _resources.Add(resource);
+      NotifyOfFilledStorages();
     }
 
     public void Drop()
@@ -31,13 +56,16 @@ namespace Codebase.Areas
 
       for (int i = 0; i < _storages.Length; i++)
       {
-        if (!_storages[i].IsEmpty) 
+        if (!_storages[i].IsEmpty)
+        {
           resources[i] = _resources.LastOrDefault(r => r.Type == _storages[i].ResourceType);
+        }
       }
 
       foreach (Resource resource in resources)
       {
-        if (resource is null) return;
+        if (resource is null)
+          return;
       }
 
       for (int i = 0; i < resources.Length; i++)
@@ -51,6 +79,8 @@ namespace Codebase.Areas
         _resources.Remove(resources[i]);
         _storages[i].LastFilledCell.Empty();
       }
+      
+      NotifyOfEmptyStorages();
     }
 
     public Storage GetStorageByResourceType(ResourceType targetResource)

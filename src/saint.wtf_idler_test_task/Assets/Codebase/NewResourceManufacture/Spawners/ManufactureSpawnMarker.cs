@@ -1,7 +1,7 @@
 using Codebase.MovingResource;
 using UnityEngine;
 
-namespace Codebase.Manufacture.Spawners
+namespace Codebase.NewResourceManufacture.Spawners
 {
   public class ManufactureSpawnMarker : MonoBehaviour
   {

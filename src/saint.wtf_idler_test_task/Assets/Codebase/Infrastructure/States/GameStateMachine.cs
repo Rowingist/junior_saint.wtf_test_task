@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Codebase.Events;
 using Codebase.Infrastructure.Factory;
 using Codebase.Services;
 using Codebase.Services.Input;
@@ -16,7 +17,8 @@ namespace Codebase.Infrastructure.States
     private Dictionary<Type, IExitableState> _states;
     private IExitableState _activeState;
 
-    public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain loadingCurtain, AllServices services)
+    public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain loadingCurtain, AllServices services,
+      ManufactureStopWorkEventProvider stopWorkEventProvider)
     {
       _states = new Dictionary<Type, IExitableState>
       {
@@ -27,13 +29,14 @@ namespace Codebase.Infrastructure.States
 
         [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain,
           services.Single<IPersistentProgressService>(), services.Single<IGameFactory>(),
-          services.Single<IStaticDataService>(), services.Single<IInputService>(), services.Single<IUIFactory>()),
+          services.Single<IStaticDataService>(), services.Single<IInputService>(), services.Single<IUIFactory>(),
+          stopWorkEventProvider),
 
         [typeof(GameLoopState)] = new GameLoopState(this, services.Single<IStaticDataService>(),
           services.Single<IPersistentProgressService>())
       };
     }
-    
+
     public void Enter<TState>() where TState : class, IState
     {
       IState state = ChangeState<TState>();
@@ -56,7 +59,7 @@ namespace Codebase.Infrastructure.States
       return state;
     }
 
-    private TState GetState<TState>() where TState : class, IExitableState => 
+    private TState GetState<TState>() where TState : class, IExitableState =>
       _states[typeof(TState)] as TState;
   }
 }

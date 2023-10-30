@@ -21,20 +21,20 @@ namespace Codebase.UI.Services.Factory
     public GameObject CreateUIRoot() => 
       _assets.Instantiate(AssetPaths.UIRootPath);
 
-    public GameObject CreateWarningWindow(Transform under)
+    public GameObject CreateWarningContainer(GameObject under)
     {
       WindowConfig config = _staticData.ForWindow(WindowId.WarningContainer);
-      WarningWindow warningWindow = Object.Instantiate(config.Template, under) as WarningWindow;
-      
-      return warningWindow.gameObject;
+      GameObject warningsContainer = _assets.Instantiate(config.Template.gameObject, under);
+
+      return warningsContainer;
     }
 
-    public GameObject CreateWarningItem(Transform under)
+    public GameObject CreateWarningItem(GameObject under)
     {
       WindowConfig config = _staticData.ForWindow(WindowId.WarningItem);
-      WindowBase warningItem = Object.Instantiate(config.Template, under);
+      GameObject warningItem = _assets.Instantiate(config.Template.gameObject, under);
 
-      return warningItem.gameObject;
+      return warningItem;
     }
   }
 }

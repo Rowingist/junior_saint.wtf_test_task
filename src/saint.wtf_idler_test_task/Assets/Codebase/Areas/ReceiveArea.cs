@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,25 @@ namespace Codebase.Areas
 
     private readonly List<Resource> _resources = new List<Resource>();
 
+    public event Action<ResourceType> FilledUp;
+    public event Action UnFilled;
+    
     public Vector3 CentralPoint => _centralPoint.position;
 
     public void Receive(Resource resource)
     {
-      if (!Storage.FirstEmptyCell) return;
+      if (!Storage.FirstEmptyCell)
+        return;
 
       StartCoroutine(Transmit(resource, Storage.FirstEmptyCell.transform));
       Storage.FirstEmptyCell.Fill(resource.Type);
+
+      if (!Storage.FirstEmptyCell)
+      {
+        print("full");
+        FilledUp?.Invoke(Storage.ResourceType);
+      }
+      
       _resources.Add(resource);
     }
 
@@ -50,6 +62,7 @@ namespace Codebase.Areas
     {
       if (!Storage.LastFilledCell) return;
 
+      UnFilled?.Invoke();
       Storage.LastFilledCell.Empty();
       _resources.Remove(resource);
     }

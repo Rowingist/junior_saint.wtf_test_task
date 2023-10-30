@@ -6,7 +6,7 @@ namespace Codebase.UI.Services.Factory
   public interface IUIFactory : IService
   {
     GameObject CreateUIRoot();
-    GameObject CreateWarningWindow(Transform under);
-    GameObject CreateWarningItem(Transform under);
+    GameObject CreateWarningContainer(GameObject under);
+    GameObject CreateWarningItem(GameObject under);
   }
 }

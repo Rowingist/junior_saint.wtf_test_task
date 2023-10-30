@@ -10,6 +10,9 @@ namespace Codebase.Infrastructure.AssetManagement
     public GameObject Instantiate(GameObject template, Transform under) => 
       Object.Instantiate(template, under.position, Quaternion.identity, under);
 
+    public GameObject Instantiate(GameObject template, GameObject under) => 
+      Object.Instantiate(template, under.transform);
+
     public GameObject Instantiate(string path)
     {
       var template = Resources.Load<GameObject>(path);

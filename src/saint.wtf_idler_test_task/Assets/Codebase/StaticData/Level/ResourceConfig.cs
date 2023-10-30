@@ -1,5 +1,4 @@
 using System;
-using Codebase.MovingResource;
 using UnityEngine;
 
 namespace Codebase.StaticData.Level
@@ -8,7 +7,6 @@ namespace Codebase.StaticData.Level
   public class ResourceConfig
   {
     public Sprite GUIIcon;
-    public ResourceType ResourceType;
     public GameObject Template;
   }
 }

@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using Codebase.Events;
 using Codebase.Hero;
 using Codebase.Infrastructure.AssetManagement;
-using Codebase.Manufacture.Spawners;
 using Codebase.MovingResource;
+using Codebase.NewResourceManufacture.Spawners;
 using Codebase.Services.Input;
 using Codebase.Services.PersistentProgress;
 using Codebase.Services.StaticData;
@@ -32,7 +33,6 @@ namespace Codebase.Infrastructure.Factory
     public GameObject CreateHud()
     {
       GameObject hud = InstantiateRegistered(AssetPaths.HudPath);
-
       return hud;
     }
 
@@ -50,11 +50,13 @@ namespace Codebase.Infrastructure.Factory
       return Hero;    
     }
 
-    public void CreateManufactureSpawner(Vector3 at, ResourceType resourceType)
+    public GameObject CreateManufactureSpawner(Vector3 at, ResourceType resourceType)
     {
       ManufactureSpawnPoint spawner = InstantiateRegistered(AssetPaths.SpawnPoint, at).GetComponent<ManufactureSpawnPoint>();
       spawner.Construct(this, _staticData, _progressService);
       spawner.ResourceType = resourceType;
+
+      return spawner.gameObject;
     }
 
     public GameObject CreateManufacture(GameObject template, Vector3 at)

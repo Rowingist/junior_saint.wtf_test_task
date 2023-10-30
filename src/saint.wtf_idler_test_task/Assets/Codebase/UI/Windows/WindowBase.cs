@@ -24,7 +24,7 @@ namespace Codebase.UI.Windows
       SubscribeUpdates();
     }
 
-    private void OnDestroy() => 
+    public virtual void OnDestroy() => 
       CleanUp();
 
     // protected virtual void OnAwake()
