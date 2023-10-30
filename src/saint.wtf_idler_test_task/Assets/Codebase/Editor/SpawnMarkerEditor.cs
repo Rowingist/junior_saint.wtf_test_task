@@ -1,4 +1,4 @@
-using Codebase.Manufacture.Spawners;
+using Codebase.NewResourceManufacture.Spawners;
 using UnityEditor;
 using UnityEngine;
 

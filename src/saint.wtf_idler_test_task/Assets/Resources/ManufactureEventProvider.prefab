@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7151839919904557789
+--- !u!1 &1988869958910770673
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1842008162558999036}
-  - component: {fileID: 8797313760666989500}
+  - component: {fileID: 6645478471696120372}
+  - component: {fileID: 5776940513362942944}
   m_Layer: 0
-  m_Name: GameBootstrapper
+  m_Name: ManufactureEventProvider
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1842008162558999036
+--- !u!4 &6645478471696120372
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7151839919904557789}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 1988869958910770673}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32,17 +32,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8797313760666989500
+--- !u!114 &5776940513362942944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7151839919904557789}
+  m_GameObject: {fileID: 1988869958910770673}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ee2422790ca1534bb9b0fd4f6b804ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 07721ab27462453b82e9fca7f4385c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _curtainTemplate: {fileID: 6867582227317219629, guid: f5465b95b95c26a4f93d3c05b7c28f5c, type: 3}
-  _manufactureStopWorkEvents: {fileID: 5776940513362942944, guid: ff6ab92e2b75c7e44a89868739a82872, type: 3}

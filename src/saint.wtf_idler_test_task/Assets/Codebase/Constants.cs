@@ -12,5 +12,8 @@ namespace Codebase
     public const string DefaultSceneName = "Level_1";
     public const int InitialBagCapacity = 10;
     public const int InitialMoveSpeed = 4;
+
+    public const string NeedResource = "Need Resource";
+    public const string FilledUp = "Filled Up";
   }
 }

@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Xml;
-using Codebase.Manufacture.Spawners;
+using Codebase.NewResourceManufacture.Spawners;
 using Codebase.StaticData.Level;
 using UnityEditor;
 using UnityEngine;

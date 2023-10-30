@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using Codebase.Logic;
 using Codebase.MovingResource;
 using UnityEngine;
 
-namespace Codebase.Manufacture
+namespace Codebase.NewResourceManufacture
 {
   public class NoSupplyManufacture : Manufacture
   {

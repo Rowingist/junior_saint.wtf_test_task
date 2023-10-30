@@ -6,11 +6,35 @@ using Codebase.Logic;
 using Codebase.MovingResource;
 using UnityEngine;
 
-namespace Codebase.Manufacture
+namespace Codebase.NewResourceManufacture
 {
   public class SupplyManufacture : Manufacture
   {
     [SerializeField] private DropArea _dropArea;
+
+    public event Action<int, ResourceType, Manufacture> StoppedDigesting;
+    public event Action<Manufacture> StartedDigesting;
+
+    public void Start()
+    {
+      _dropArea.OutOfResource += OnAreaEmpty;
+      _dropArea.Filled += OnAreaFilled;
+    }
+
+    protected override void OnDestroy()
+    {
+      base.OnDestroy();
+      _dropArea.OutOfResource -= OnAreaEmpty;
+      _dropArea.Filled -= OnAreaFilled;
+    }
+
+    private void OnAreaEmpty(ResourceType type)
+    {
+      StoppedDigesting?.Invoke(Number, type, this);
+    }
+
+    private void OnAreaFilled() => 
+      StartedDigesting?.Invoke(this);
 
     public override void Produce() =>
       StartCoroutine(Producing());

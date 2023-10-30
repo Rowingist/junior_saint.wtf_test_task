@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 1744197244274718407}
   - component: {fileID: 4065393851234126443}
   - component: {fileID: 5934233268110057010}
+  - component: {fileID: -6177316255660925106}
   m_Layer: 5
   m_Name: Warning_item
   m_TagString: Untagged
@@ -191,6 +192,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-6177316255660925106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202733235425440504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea5a51a43604859b5a0a7f0c7e63344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _warning: {fileID: 5475822896686650263}
+  _itemImage: {fileID: 975424505046146683}
 --- !u!1 &7680818773565282952
 GameObject:
   m_ObjectHideFlags: 0

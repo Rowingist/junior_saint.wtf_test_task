@@ -1,5 +1,9 @@
+using System.Collections.Generic;
 using Codebase.CameraLogic;
+using Codebase.Events;
 using Codebase.Infrastructure.Factory;
+using Codebase.NewResourceManufacture;
+using Codebase.NewResourceManufacture.Spawners;
 using Codebase.Services.Input;
 using Codebase.Services.PersistentProgress;
 using Codebase.Services.StaticData;
@@ -21,10 +25,13 @@ namespace Codebase.Infrastructure.States
     private readonly IStaticDataService _staticData;
     private readonly IInputService _inputService;
     private readonly IUIFactory _uiFactory;
+    private readonly ManufactureStopWorkEventProvider _stopWorkEventProvider;
 
+    private GameObject _warningsContainer;
+    
     public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain,
       IPersistentProgressService progressService, IGameFactory gameFactory, IStaticDataService staticData,
-      IInputService inputService, IUIFactory uiFactory)
+      IInputService inputService, IUIFactory uiFactory, ManufactureStopWorkEventProvider stopWorkEventProvider)
     {
       _gameStateMachine = gameStateMachine;
       _sceneLoader = sceneLoader;
@@ -34,6 +41,7 @@ namespace Codebase.Infrastructure.States
       _staticData = staticData;
       _inputService = inputService;
       _uiFactory = uiFactory;
+      _stopWorkEventProvider = stopWorkEventProvider;
     }
 
     public void Enter(string sceneName)
@@ -58,37 +66,62 @@ namespace Codebase.Infrastructure.States
       _gameStateMachine.Enter<GameLoopState>();
     }
 
-    private void InitUIRoot() => 
-      _uiFactory.CreateUIRoot();
+    private void InitUIRoot()
+    {
+      GameObject uiRoot = _uiFactory.CreateUIRoot();
+      _warningsContainer = InitWarningsContainer(uiRoot);
+    }
+
+    private GameObject InitWarningsContainer(GameObject under) =>
+      _uiFactory.CreateWarningContainer(under);
 
     private void InitGameWorld()
     {
       LevelStaticData levelData = LevelStaticData();
-      
-      GameObject hud = InitHud();
-      InitJoystick(hud.transform);
 
-      InitSpawners(levelData);
+      List<Manufacture> manufactures = InitSpawners(levelData);
+      InitEventProviders(manufactures);
+
       GameObject player = InitPlayer(levelData);
       CameraFollow(player);
+
+      GameObject hud = InitHud(_warningsContainer);
+      InitJoystick(hud.transform);
     }
-    
-    private void InitSpawners(LevelStaticData levelStaticData)
+
+    private List<Manufacture> InitSpawners(LevelStaticData levelStaticData)
     {
+      List<Manufacture> manufactures = new List<Manufacture>();
       foreach (ManufactureSpawnerStaticData spawnerData in levelStaticData.ManufactureSpawners)
-          _gameFactory.CreateManufactureSpawner( spawnerData.Position, spawnerData.ResourceType);
+      {
+        GameObject manufactureSpawner =
+          _gameFactory.CreateManufactureSpawner(spawnerData.Position, spawnerData.ResourceType);
+        Manufacture manufacture = manufactureSpawner.GetComponent<ManufactureSpawnPoint>().Spawn();
+        manufactures.Add(manufacture);
+      }
+
+      return manufactures;
     }
-    
+
+    private void InitEventProviders(List<Manufacture> manufactures) =>
+      _stopWorkEventProvider.Construct(manufactures);
+
     private LevelStaticData LevelStaticData() =>
       _staticData.ForLevel(SceneManager.GetActiveScene().name);
 
-    private GameObject InitHud() => 
-      _gameFactory.CreateHud();
+    private GameObject InitHud(GameObject warningsContainer)
+    {
+      GameObject hudObject = _gameFactory.CreateHud();
+      hudObject.GetComponentInChildren<WarningsActorUI>()
+        .Construct(_uiFactory, _stopWorkEventProvider, _staticData, warningsContainer);
 
-    private void InitJoystick(Transform under) => 
+      return hudObject;
+    }
+
+    private void InitJoystick(Transform under) =>
       _gameFactory.CreateJoystick(under);
 
-    private GameObject InitPlayer(LevelStaticData levelData) => 
+    private GameObject InitPlayer(LevelStaticData levelData) =>
       _gameFactory.CreateHero(levelData.InitialHeroPosition);
 
     private void InformProgressReaders()
@@ -102,6 +135,5 @@ namespace Codebase.Infrastructure.States
       CameraFollow cameraFollow = Camera.main.GetComponentInParent<CameraFollow>();
       cameraFollow.Follow(Hero);
     }
-    
   }
 }
