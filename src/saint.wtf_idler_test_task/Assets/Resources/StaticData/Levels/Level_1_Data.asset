@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: Level_1
   InitialHeroPosition: {x: -1.25, y: 0, z: -4.23}
-  ResourcePoolsCapacity: 40
+  ResourcePoolsCapacity: 60
   Configs:
   - OnSceneNumber: 1
     Template: {fileID: 1711936967375534460, guid: 69f0f9c721b288444a0b56c89fedc9fe, type: 3}

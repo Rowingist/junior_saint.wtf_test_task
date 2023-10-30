@@ -28,9 +28,12 @@ namespace Codebase.Areas
 
       StartCoroutine(Transmit(resource, Storage.FirstEmptyCell.transform));
       Storage.FirstEmptyCell.Fill(resource.Type);
-     
-      if (!Storage.FirstEmptyCell) 
+
+      if (!Storage.FirstEmptyCell)
+      {
+        print("full");
         FilledUp?.Invoke(Storage.ResourceType);
+      }
       
       _resources.Add(resource);
     }

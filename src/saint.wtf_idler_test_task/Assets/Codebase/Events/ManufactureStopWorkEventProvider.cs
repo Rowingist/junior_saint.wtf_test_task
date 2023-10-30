@@ -43,14 +43,14 @@ namespace Codebase.Events
       }
     }
 
-    private void OnStopManufactureDigest(int manufactureNumber, ResourceType resourceType, Manufacture manufacture)
-    {
-      ManufactureStoppedWork?.Invoke(manufactureNumber, resourceType, Constants.NeedResource, manufacture);
-    }
-
     private void OnStopManufactureMaking(int manufactureNumber, ResourceType resourceType, Manufacture manufacture)
     {
       ManufactureStoppedWork?.Invoke(manufactureNumber, resourceType, Constants.FilledUp, manufacture);
+    }
+
+    private void OnStopManufactureDigest(int manufactureNumber, ResourceType resourceType, Manufacture manufacture)
+    {
+      ManufactureStoppedWork?.Invoke(manufactureNumber, resourceType, Constants.NeedResource, manufacture);
     }
 
     private void FillManufactures(List<Manufacture> manufactures)

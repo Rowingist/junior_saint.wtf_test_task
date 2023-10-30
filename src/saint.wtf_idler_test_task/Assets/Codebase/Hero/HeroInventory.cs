@@ -43,6 +43,7 @@ namespace Codebase.Hero
       }
     }
 
+    private float _elapsed;
     private IEnumerator Dropping(DropArea dropArea)
     {
       ResourceType[] resourceToDrop = dropArea.GetStorageResourceTypes();
@@ -179,16 +180,16 @@ namespace Codebase.Hero
       for (int i = 0; i < _resources.Count; i++)
       {
         if (_resources[i].Type == _cells[i].FilledResourceType)
-          StartCoroutine(Transmit(_resources[i], _cells[i].transform));
+          _resources[i].transform.position = _cells[i].transform.position;
       }
     }
 
     private IEnumerator Transmit(Resource resource, Transform target)
     {
-      yield return new WaitUntil(() => resource.IsPickable);
+      if(!resource.IsPickable)
+        yield return new WaitUntil(() => resource.IsPickable);
       
       resource.transform.parent = null;
-
       yield return StartCoroutine(RoutineUtils.TransitToTarget(resource.transform, target.position, Constants.ResourceFromToPlayerMoveDuration));
 
       SetNewParent(resource.transform, target);
